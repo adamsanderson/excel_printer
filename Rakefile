@@ -13,7 +13,7 @@ begin
     s.email = "netghost@gmail.com"
     s.homepage = "http://github.com/adamsanderson/excel_printer"
     s.authors = ["Adam Sanderson"]
-    s.files = FileList["[A-Z]*", "{bin,lib,test}/**/*"]
+    s.files = FileList["[A-Z]*", "{bin,lib,test,examples}/**/*"]
     
     # Runtime dependencies
     s.add_dependency 'ruby-prof', '~> 0.7'
