@@ -16,7 +16,7 @@ begin
     s.files = FileList["[A-Z]*", "{bin,lib,test}/**/*"]
     
     # Runtime dependencies
-    s.add_dependency 'ruby-prof', "~> 0.7"
+    s.add_dependency 'ruby-prof', '~> 0.7'
     s.add_dependency 'spreadsheet', '~> 0.6.3'
     
     # Testing -- none yet
