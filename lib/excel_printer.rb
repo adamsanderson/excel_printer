@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'ruby_prof'
+require 'ruby-prof'
 require 'ruby-prof/abstract_printer'
 require 'spreadsheet'
 
 # Actual Libraries
-require 'excel_printer/flat_excel_printer'
+require File.join(File.dirname(__FILE__), 'excel_printer','flat_excel_printer')

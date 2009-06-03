@@ -5,7 +5,7 @@
 #     [code to profile]
 #   end
 #
-#   printer = FlatExcelPrinter.new(result)
+#   printer = ExcelPrinter::FlatExcelPrinter.new(result)
 #   printer.print('report.xls')
 #
 module ExcelPrinter
@@ -26,7 +26,7 @@ module ExcelPrinter
     
       # Spreadsheet::Workbook#write seems to need a file path,
       # or possibly a r/w IO object, so for now just get the path, write there.
-      path = output.responds_to?(:path) ? output.path : output.to_s
+      path = output.respond_to?(:path) ? output.path : output.to_s
       workbook.write path
     end      
   
