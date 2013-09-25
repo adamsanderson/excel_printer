@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'ruby-prof'
-#require 'ruby-prof/abstract_printer'
 require 'axlsx'
 
 # Actual Libraries
