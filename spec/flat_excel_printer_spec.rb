@@ -4,8 +4,9 @@ require 'excel_printer'
 
 describe "ExcelPrinter" do
 
-  after(:each) do
-    `rm tmp/*`
+  after(:all) do
+   `rm tmp/*`
+   `rm report.xlsx`
   end
 
   describe "print" do
@@ -19,6 +20,17 @@ describe "ExcelPrinter" do
       printer = ExcelPrinter::FlatExcelPrinter.new result
       printer.print "tmp/test_report.xlsx"
       File.exists?("tmp/test_report.xlsx").should == true
+    end
+
+    it "shpuld default to report.xlsx if no filename is provided" do
+
+      result = RubyProf.profile do
+        k = 1 - 2
+      end
+
+      printer = ExcelPrinter::FlatExcelPrinter.new result
+      printer.print
+      File.exists?("report.xlsx").should == true 
     end
   end
 end
