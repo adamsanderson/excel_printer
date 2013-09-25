@@ -22,7 +22,7 @@ describe "ExcelPrinter" do
       File.exists?("tmp/test_report.xlsx").should == true
     end
 
-    it "shpuld default to report.xlsx if no filename is provided" do
+    it "should default to report.xlsx if no filename is provided" do
 
       result = RubyProf.profile do
         k = 1 - 2

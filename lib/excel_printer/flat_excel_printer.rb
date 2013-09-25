@@ -64,7 +64,7 @@ module ExcelPrinter
 
       sheet.add_row []
       
-      sheet.add_row ["%self", "total", "self" , "wait" , "child", "calls", "name"], :style => [bold_cell]
+      sheet.add_row ["%self", "total", "self" , "wait" , "child", "calls", "name"], :style => bold_cell
       
       methods.each do |method|
         #self_percent = (method.self_time / total_time) * 100
