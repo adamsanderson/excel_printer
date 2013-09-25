@@ -21,62 +21,64 @@ module ExcelPrinter
     def print(output = self.to_s, options = {})
       setup_options(options)
     
-      workbook = Spreadsheet::Workbook.new
+      package = Axlsx::Package.new
+      workbook = package.workbook
       print_threads(workbook)
     
       # Spreadsheet::Workbook#write seems to need a file path,
       # or possibly a r/w IO object, so for now just get the path, write there.
       path = output.respond_to?(:path) ? output.path : output.to_s
-      workbook.write path
+      package.serialize path 
     end      
   
     # The ruby-prof performance tests seem to use this as the default
     # name for the reports.
     def to_s
-      'excel_flat_printer.xls'
+      'report.xlsx'
     end
   
-    private 
-  
     def print_threads(workbook)
-      @result.threads.each do |thread_id, methods|
-        sheet = workbook.create_worksheet(:name=>"Thread #{thread_id}")
-        print_methods(sheet, thread_id, methods)
+      @result.threads.each_with_index do |thread, index|
+        sheet = workbook.add_worksheet(:name =>"Thread #{index}")
+        methods = thread.methods.nil? ? [] : thread.methods
+        print_methods(workbook, sheet, thread, methods)
       end
     end
   
-    def print_methods(sheet, thread_id, methods)
+    def print_methods(workbook, sheet, thread, methods)
       # Get total time
+      sum = 0
       toplevel = methods.sort.last
       total_time = toplevel.total_time
       if total_time == 0
         total_time = 0.01
       end
-    
-      header = sheet.row(0)
-      header.push "%self", "total", "self" , "wait" , "child", "calls", "name"
 
-      bold = Spreadsheet::Format.new(:weight=>:bold)
-      header.each_with_index{|cell, i| header.set_format(i, bold) }
-    
-      sum = 0    
-      row_index = 1
+      bold_cell = nil
+      workbook.styles do |s|
+        bold_cell = s.add_style :b => true
+      end
+      
+      sheet.add_row [ "Thread Total Time" ], :style => [bold_cell]
+      sheet.add_row [ thread.total_time ]
+
+      sheet.add_row []
+      
+      sheet.add_row ["%self", "total", "self" , "wait" , "child", "calls", "name"], :style => [bold_cell]
+      
       methods.each do |method|
-        self_percent = (method.self_time / total_time) * 100
+        #self_percent = (method.self_time / total_time) * 100
             
         sum += method.self_time
-        #self_time_called = method.called > 0 ? method.self_time/method.called : 0
-        #total_time_called = method.called > 0? method.total_time/method.called : 0
-        sheet.row(row_index).push(
-          method.self_time / total_time * 100, # %self
-          method.total_time,                   # total
-          method.self_time,                    # self
-          method.wait_time,                    # wait
-          method.children_time,                # children
-          method.called,                       # calls
-          method_name(method)                  # name
-        )
-        row_index += 1
+        sheet.add_row [
+                       method.self_time / total_time * 100, # %self
+                       method.total_time,                   # total
+                       method.self_time,                    # self
+                       method.wait_time,                    # wait
+                       method.children_time,                # children
+                       method.called,                       # calls
+                       method_name(method)                  # name
+                      ]
       end
     end
   end

@@ -22,7 +22,10 @@ Gem::Specification.new do |s|
     "lib/excel_printer.rb",
     "lib/excel_printer/flat_excel_printer.rb"
   ]
-  s.has_rdoc = true
+############################################################################################################################
+##### NOTE: Gem::Specification#has_rdoc= is deprecated with no replacement. It will be removed on or after 2011-10-01. #####
+####  s.has_rdoc = true												       #####
+############################################################################################################################
   s.homepage = %q{http://github.com/adamsanderson/excel_printer}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
@@ -37,14 +40,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ruby-prof>, ["~> 0.7"])
-      s.add_runtime_dependency(%q<spreadsheet>, ["~> 0.6.3"])
+      s.add_runtime_dependency(%q<ruby-prof>)
+      s.add_runtime_dependency(%q<axlsx>)
     else
-      s.add_dependency(%q<ruby-prof>, ["~> 0.7"])
-      s.add_dependency(%q<spreadsheet>, ["~> 0.6.3"])
+      s.add_dependency(%q<ruby-prof>)
+      s.add_dependency(%q<axlsx>)
     end
   else
-    s.add_dependency(%q<ruby-prof>, ["~> 0.7"])
-    s.add_dependency(%q<spreadsheet>, ["~> 0.6.3"])
+    s.add_dependency(%q<ruby-prof>)
+    s.add_dependency(%q<axlsx>)
   end
 end

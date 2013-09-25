@@ -1,0 +1,26 @@
+PATH
+  remote: .
+  specs:
+    excel_printer (0.1.0)
+      axlsx
+      ruby-prof
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
+    htmlentities (4.3.1)
+    mini_portile (0.5.1)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
+    ruby-prof (0.13.0)
+    rubyzip (1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  excel_printer!
