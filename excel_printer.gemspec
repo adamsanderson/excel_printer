@@ -22,10 +22,7 @@ Gem::Specification.new do |s|
     "lib/excel_printer.rb",
     "lib/excel_printer/flat_excel_printer.rb"
   ]
-############################################################################################################################
-##### NOTE: Gem::Specification#has_rdoc= is deprecated with no replacement. It will be removed on or after 2011-10-01. #####
-####  s.has_rdoc = true												       #####
-############################################################################################################################
+
   s.homepage = %q{http://github.com/adamsanderson/excel_printer}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
